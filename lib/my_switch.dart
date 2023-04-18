@@ -4,6 +4,7 @@ import 'package:switch_example/dark_mode.dart';
 class MySwitch extends StatefulWidget {
   MySwitch({required this.darkMode, super.key});
 
+  //EXTENDS VALUE NOTIFIER
   DarkMode darkMode = DarkMode(false);
 
   @override
@@ -20,7 +21,7 @@ class _MySwitchState extends State<MySwitch> {
   Widget build(BuildContext context) {
     return Switch(
         value: widget.darkMode.value,
-        onChanged: (value) {
+        onChanged: (value){
           setState(() {
             widget.darkMode.value = value;
             widget.darkMode.onSwitch(value);
