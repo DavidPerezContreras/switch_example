@@ -5,9 +5,10 @@ import 'dark_mode.dart';
 import 'my_switch.dart';
 
 class SecondPage extends StatefulWidget {
-  SecondPage({super.key, required this.darkMode});
+  SecondPage({super.key, required this.darkMode, required this.mySwitch});
 
-  DarkMode darkMode = DarkMode(false);
+  DarkMode darkMode;
+  MySwitch mySwitch;
 
   @override
   State<SecondPage> createState() => _SecondPageState();
@@ -47,12 +48,29 @@ class _SecondPageState extends State<SecondPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [MySwitch(darkMode: widget.darkMode)],
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => FirstPage(
+                  darkMode: widget.darkMode,
+                  mySwitch: widget.mySwitch,
+                ),
+              ),
+            );
+          },
+        ),
+        actions: [
+          widget.mySwitch,
+        ],
       ),
       body: SizedBox.expand(
-          child: Container(
-        color: color,
-      )), // This trailing comma makes auto-formatting nicer for build methods.
+        child: Container(
+          color: color,
+        ),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

@@ -5,17 +5,34 @@ import 'first_page.dart';
 import 'my_switch.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp( MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  MyApp({super.key});
+  DarkMode darkMode=DarkMode(false);
+  late MySwitch mySwitch;
 
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
+
+  @override
+  void initState() {
+    super.initState();
+
+    widget.mySwitch=MySwitch(darkMode:widget.darkMode);
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: FirstPage(),
+      home: FirstPage(darkMode: widget.darkMode, mySwitch: widget.mySwitch, ),
     );
   }
 }

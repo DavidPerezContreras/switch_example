@@ -18,13 +18,19 @@ class _MySwitchState extends State<MySwitch> {
   }
 
   @override
+  void setState(VoidCallback fn) {
+    if (!mounted) return;
+    super.setState(fn);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Switch(
         value: widget.darkMode.value,
         onChanged: (value){
           setState(() {
             widget.darkMode.value = value;
-            widget.darkMode.onSwitch(value);
+            //widget.darkMode.onSwitch(value);
           },);
         });
     ;

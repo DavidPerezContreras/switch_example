@@ -5,9 +5,10 @@ import 'my_switch.dart';
 import 'second_page.dart';
 
 class FirstPage extends StatefulWidget {
-  FirstPage({super.key});
+  FirstPage({super.key, required this.darkMode, required this.mySwitch});
 
-  DarkMode darkMode = DarkMode(false);
+  DarkMode darkMode;
+  MySwitch mySwitch;
 
   @override
   State<FirstPage> createState() => _FirstPageState();
@@ -46,20 +47,19 @@ class _FirstPageState extends State<FirstPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        Navigator.push(
+      floatingActionButton: FloatingActionButton(onPressed: () async {
+        Navigator.pushReplacement(
           context,
-          PageRouteBuilder(
-            pageBuilder: (context, animation1, animation2) => SecondPage(
+          MaterialPageRoute(
+            builder: (context) => SecondPage(
               darkMode: widget.darkMode,
+              mySwitch: widget.mySwitch,
             ),
-            transitionDuration: Duration.zero,
-            reverseTransitionDuration: Duration.zero,
           ),
         );
       }),
       appBar: AppBar(
-        actions: [MySwitch(darkMode: widget.darkMode)],
+        actions: [widget.mySwitch],
       ),
       body: SizedBox.expand(
           child: Container(
